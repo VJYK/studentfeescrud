@@ -1,0 +1,85 @@
+<ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="#">Active</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Link</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Link</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link disabled">Disabled</a>
+    </li>
+    <div class="d-flex flex-row-reverse">
+        <button type="button" (click)="getClear()" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Details</button>
+    </div>
+  </ul>
+  <table class="table">
+      <thead>
+          <tr>
+              <th scope="col">Student Id</th>
+              <th scope="col">First name</th>
+              <th scope="col">Last name</th>
+              <th scope="col">Student emails</th>
+              <th scope="col">Mobile Number</th>
+              <th scope="col">Student Fees</th>
+              <th scope="col">Action</th>
+              
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let s of studentAll">
+              <td>{{s.id}}</td>
+              <td>{{s.firstName}}</td>
+              <td>{{s.lastName}}</td>
+              <td>{{s.email}}</td>
+              <td>{{s.mNumber}}</td>
+              <td>{{s.fees}}</td>
+              <td>
+                <button (click)="onEdit(s)" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary">Edit</button> &nbsp;
+                <button (click)="deleteStudentDetail(s)" class="btn btn-danger">Delete</button>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Student Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="formvalue">
+                <div class="mb-3">
+                  <label for="firstname" class="form-label">First name</label>
+                  <input type="text" formControlName="firstName" class="form-control" id="firstname" aria-describedby="">
+                </div>
+                <div class="mb-3">
+                    <label for="lastname" class="form-label">Last name</label>
+                    <input type="text" formControlName="lastName" class="form-control" id="lastname" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" formControlName="email" class="form-control" id="email" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="mnumber" class="form-label">Mobile Number</label>
+                    <input type="text" formContrlName="mNumber" class="form-control" id="mnumber" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Student Fees</label>
+                  <input type="text" formControlName="fees" class="form-control" id="exampleInputPassword1">
+                </div>
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" *ngIf="showAdd" (click)="postStudentDetails()" class="btn btn-primary" data-bs-dismiss="modal" >+Add</button>
+          <button type="button" *ngIf="showUpdate" (click)="updateStudentDetails()" class="btn btn-primary" data-bs-dismiss="modal">+Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
